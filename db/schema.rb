@@ -22,13 +22,13 @@ ActiveRecord::Schema.define(version: 20150618123748) do
   end
 
   create_table "tasks", force: :cascade do |t|
+    t.integer  "parent_id"
     t.string   "title"
     t.text     "description"
     t.string   "priority"
     t.string   "status"
     t.date     "scheduled"
     t.date     "deadline"
-    t.integer  "parent_id"
     t.integer  "user_id"
     t.integer  "project_id"
     t.datetime "created_at",  null: false

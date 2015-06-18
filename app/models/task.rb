@@ -1,6 +1,6 @@
 class Task < ActiveRecord::Base
-  has_many  :subtasks, classname: 'Task', foreign_key: 'parent_id'
-  belongs_to  :task, classname: 'Task'
+  has_many    :subtasks, class_name: 'Task'
+  belongs_to  :parent, class_name: 'Task'
   belongs_to  :user
   belongs_to  :project
 end
