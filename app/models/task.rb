@@ -1,4 +1,5 @@
 class Task < ActiveRecord::Base
+  
   validates :title, :priority,  presence: true
   validates :title, length: { minimum: 3 }
   validates :priority, numericality: { only_integer: true }, length: { is: 1 }
@@ -17,5 +18,11 @@ class Task < ActiveRecord::Base
   def default_priority
     self.priority ||= '0'
   end
+
+  scope :main, -> { where("parent_id IS ?", nil) }
+  scope :today, -> { where("scheduled <= ?", Date.today) }
+  scope :tomorrow, -> { where("scheduled = ?", Date.tomorrow) }
+  scope :scheduled, -> { where("scheduled > ?", Date.tomorrow) }
+  scope :waiting, -> { where("scheduled IS ?", nil) }
 
 end

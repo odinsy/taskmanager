@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
   
   def index
-    @tasks = Task.where("parent_id IS ?", nil)
+    @tasks = Task.main
   end
   
   def show
@@ -30,7 +30,7 @@ class TasksController < ApplicationController
     if @task.errors.empty?
       redirect_to @task
     else
-      render 'edit'
+      redirect_to :back
     end
   end
   
