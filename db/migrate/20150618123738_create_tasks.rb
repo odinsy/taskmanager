@@ -1,7 +1,6 @@
 class CreateTasks < ActiveRecord::Migration
   def change
     create_table :tasks do |t|
-      t.integer :parent_id
       t.string  :title
       t.text    :description
       t.string  :priority
@@ -11,6 +10,7 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :user_id
       t.integer :project_id
 
+      t.references  :parent, index: true
       t.timestamps null: false
     end
   end

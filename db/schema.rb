@@ -22,7 +22,6 @@ ActiveRecord::Schema.define(version: 20150618123748) do
   end
 
   create_table "tasks", force: :cascade do |t|
-    t.integer  "parent_id"
     t.string   "title"
     t.text     "description"
     t.string   "priority"
@@ -31,9 +30,12 @@ ActiveRecord::Schema.define(version: 20150618123748) do
     t.date     "deadline"
     t.integer  "user_id"
     t.integer  "project_id"
+    t.integer  "parent_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "tasks", ["parent_id"], name: "index_tasks_on_parent_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

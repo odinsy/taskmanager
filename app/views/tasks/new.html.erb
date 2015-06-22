@@ -1,0 +1,8 @@
+<%= simple_form_for @task do |f| %>
+  <%= f.input :title %>
+  <%= f.input :description %>
+  <%= f.input :scheduled %>
+  <%= f.input :deadline %>
+  <%= f.input :priority, collection: [["None", 0], ["High", 3], ["Medium", 2], ["Low", 1]], selected: ["None"] %>
+  <%= f.button :submit %>
+<% end %>

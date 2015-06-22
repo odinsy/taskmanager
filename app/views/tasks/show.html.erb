@@ -1,0 +1,10 @@
+<%= @task.deadline %>
+<%= @task.title %>
+<%= @task.description %>
+<br>
+<% @task.subtasks.each do |s| %>
+  <br><%= s.title %>
+  <%= link_to 'Delete', [s], method: :delete, data: { confirm: 'Вы уверены?' } %>
+<% end %>
+
+<%= render "subtask" %>
