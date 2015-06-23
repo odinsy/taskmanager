@@ -28,9 +28,13 @@ class TasksController < ApplicationController
   def update
     @task.update_attributes(task_params)
     if @task.errors.empty?
-      redirect_to @task
+      redirect_to tasks_path
     else
-      redirect_to :back
+      if @task.parent.nil?
+        render 'edit'
+      else
+        redirect_to @task.parent
+      end
     end
   end
   
