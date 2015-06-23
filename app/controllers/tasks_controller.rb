@@ -36,7 +36,11 @@ class TasksController < ApplicationController
   
   def destroy
     @task.destroy
-    redirect_to tasks_path
+    if @task.parent_id?
+      redirect_to @task.parent
+    else
+      redirect_to tasks_path
+    end
   end
   
   private
