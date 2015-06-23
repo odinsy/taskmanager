@@ -19,7 +19,7 @@ class TasksController < ApplicationController
   def create
     @task = Task.create(task_params)
     if @task.errors.empty?
-      redirect_to @task
+      redirect_to tasks_path
     else
       render 'new'
     end
@@ -28,9 +28,13 @@ class TasksController < ApplicationController
   def update
     @task.update_attributes(task_params)
     if @task.errors.empty?
-      redirect_to tasks_path
+      redirect_to @task
     else
-      render 'edit'
+      unless :subtasks_attributes.nil?
+        redirect_to @task
+      else
+        render 'edit'
+      end
     end
   end
   
