@@ -30,11 +30,7 @@ class TasksController < ApplicationController
     if @task.errors.empty?
       redirect_to tasks_path
     else
-      if @task.parent.nil?
-        render 'edit'
-      else
-        redirect_to @task.parent
-      end
+      render 'edit'
     end
   end
   

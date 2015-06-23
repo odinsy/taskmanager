@@ -21,7 +21,7 @@ class Task < ActiveRecord::Base
 
   scope :main, -> { where("parent_id IS ?", nil) }
   scope :today, -> { where("scheduled <= ?", Date.today) }
-  scope :tomorrow, -> { where("scheduled = ?", Date.tomorrow) }
+  scope :tomorrow, -> { where("scheduled == ?", Date.tomorrow) }
   scope :scheduled, -> { where("scheduled > ?", Date.tomorrow) }
   scope :waiting, -> { where("scheduled IS ?", nil) }
 
