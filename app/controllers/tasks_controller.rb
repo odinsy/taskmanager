@@ -27,14 +27,10 @@ class TasksController < ApplicationController
   
   def update
     @task.update_attributes(task_params)
-    if @task.errors.empty?
+    if @task.errors.empty? || :subtasks_attributes?
       redirect_to @task
     else
-      unless :subtasks_attributes.nil?
-        redirect_to @task
-      else
-        render 'edit'
-      end
+      render 'edit'
     end
   end
   
