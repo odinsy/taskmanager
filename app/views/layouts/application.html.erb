@@ -10,13 +10,16 @@
 
   <header class="navbar navbar-default navbar-fixed-top">
     <div class="container">
-      <div class="col-md-2">
-      </div>
-      <div class="col-md-10">
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-left">
-            <li><%= link_to "Добавить задачу", new_task_path, class: "btn btn-default btn-sm navbar-left" %></li>
-          </ul>
+      <div class="row">
+        <div class="col-md-2 user-block">
+          <span>Username</span>
+        </div>
+        <div class="col-md-10 nav-block">
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-left">
+              <li><%= link_to "Добавить задачу", new_task_path, class: "btn btn-default btn-sm navbar-left" %></li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -33,13 +36,13 @@
             <%= link_to "Today", tasks_path %>
           </li>
           <li>
-            <a href="#">Tomorrow</a>
+            <%= link_to "Tomorrow", tomorrow_tasks_path %>
           </li>
           <li>
-            <a href="#">Scheduled</a>
+            <%= link_to "Scheduled", scheduled_tasks_path %>
           </li>
           <li>
-            <a href="#">Waiting</a>
+            <%= link_to "Waiting", waiting_tasks_path %>
           </li>
         </ul>
         <section class="sidebar-title">

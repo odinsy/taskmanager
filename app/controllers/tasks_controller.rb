@@ -3,10 +3,6 @@ class TasksController < ApplicationController
   before_action :find_task, only: [:show, :edit, :update, :destroy]
 
   def index
-    @tasks = Task.main
-  end
-
-  def today
     @tasks = Task.main.today
   end
 
@@ -19,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def waiting
-    @tasks = Task.main.tomorrow
+    @tasks = Task.main.waiting
   end
 
   def show

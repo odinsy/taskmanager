@@ -2,6 +2,7 @@ html, body, .container, .row {
   height: 100%;
 }
 body { padding-top: 50px; }
+
 /* clearfix */
 .clearfix() {
   &:before,
@@ -13,25 +14,29 @@ body { padding-top: 50px; }
     clear: both;
   }
 }
+/* nopadding */
+.nopadding{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 /* Блок tasks#index */
-.sidebar, .content {
+.user-block{
+  background: white;
+  min-height: 100% !important;
+}
+.user-block, .sidebar, .content {
   height:100%;
 }
 .sidebar{
   background: #D0D0D0;
   position: fixed;
 }
-
 .content {
   background: beige;
   padding: 10px;
 }
 .content hr {
   margin: 0;
-}
-.nopadding{
-  padding-left: 0 !important;
-  padding-right: 0 !important;
 }
 .sidebar-title {
   margin-top:5px;
@@ -57,10 +62,16 @@ body { padding-top: 50px; }
   float:left;
   margin: 0 auto;
 }
-
 .task-description {
+  min-height: 100px;
 }
-
+.subtask-title {
+  border-bottom: 1px solid #ddd;
+  padding: 5px !important;
+}
+.subtask-title ul, ol {
+  margin: 5px 5px;
+}
 textarea {
    resize: none;
 }

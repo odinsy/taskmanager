@@ -11,24 +11,25 @@
   </div>
 
   <div class="panel-heading task-title">
-    <%= @task.title %>
+    <span><%= @task.title %></span>
   </div>
 
   <div class="panel-body task-description">
-    <%= @task.description %>
+    <span><%= @task.description %></span>
   </div>
 
-
-    <% @task.subtasks.each do |s| %>
-      <div class="panel-body subtask-title">
-        <ul>
-          <li>
-            <%= s.title %>
-            <%= link_to 'Delete', [s], method: :delete, data: { confirm: 'Вы уверены?' } %>
-          </li>
-        </ul>
-      </div>
-    <% end %>
+  <hr>
+  
+  <% @task.subtasks.each do |s| %>
+  <div class="panel-body subtask-title">
+    <ul>
+      <li>
+        <%= s.title %>
+        <%= link_to 'Delete', [s], method: :delete, data: { confirm: 'Вы уверены?' } %>
+      </li>
+    </ul>
+  </div>
+  <% end %>
 
 </div>
 
