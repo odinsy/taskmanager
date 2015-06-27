@@ -1,10 +1,35 @@
-<%= @task.deadline %>
-<%= @task.title %>
-<%= @task.description %>
-<br>
-<% @task.subtasks.each do |s| %>
-  <br><%= s.title %>
-  <%= link_to 'Delete', [s], method: :delete, data: { confirm: 'Вы уверены?' } %>
-<% end %>
+
+<div class="panel panel-default">
+
+  <div class="panel-heading task-head clearfix">
+    <div class="task-priority">
+      <span><%= @task.priority %></span>
+    </div>
+    <div class="task-deadline">
+      <span><%= @task.deadline %></span>
+    </div>
+  </div>
+
+  <div class="panel-heading task-title">
+    <%= @task.title %>
+  </div>
+
+  <div class="panel-body task-description">
+    <%= @task.description %>
+  </div>
+
+
+    <% @task.subtasks.each do |s| %>
+      <div class="panel-body subtask-title">
+        <ul>
+          <li>
+            <%= s.title %>
+            <%= link_to 'Delete', [s], method: :delete, data: { confirm: 'Вы уверены?' } %>
+          </li>
+        </ul>
+      </div>
+    <% end %>
+
+</div>
 
 <%= render "subtask" %>

@@ -1,8 +1,11 @@
-<ul class="list-group">
-  <% @tasks.each do |task| %>
-    <li class="list-group-item">
-      <%= link_to task.title, task_path(task) %>
-     <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Вы уверены?' } %>
-  </li>
-  <% end %>
-</ul>
+
+<% @tasks.each do |task| %>
+
+    <div class="list-group">
+      <li class="list-group-item">
+        <%= link_to task.title, task_path(task)  %>
+        <%= link_to 'Delete', task, method: :delete, data: { confirm: 'Вы уверены?' } %>
+      </li>
+    </ul>
+
+<% end %>

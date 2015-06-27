@@ -1,3 +1,66 @@
-body {
-  padding-top: 100px;
+html, body, .container, .row {
+  height: 100%;
+}
+body { padding-top: 50px; }
+/* clearfix */
+.clearfix() {
+  &:before,
+  &:after {
+    content: " ";
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+/* Блок tasks#index */
+.sidebar, .content {
+  height:100%;
+}
+.sidebar{
+  background: #D0D0D0;
+  position: fixed;
+}
+
+.content {
+  background: beige;
+  padding: 10px;
+}
+.content hr {
+  margin: 0;
+}
+.nopadding{
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+.sidebar-title {
+  margin-top:5px;
+  padding: 10px 15px;
+}
+
+/* Блок tasks#show */
+.task-head {
+  padding: 0px 0px !important;
+  .clearfix();
+}
+.task-priority, .task-deadline {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.task-priority {
+  border-right: 1px solid #ddd;
+  float: left;
+  margin: 0 auto;
+}
+.task-deadline {
+  border-right: 1px solid #ddd;
+  float:left;
+  margin: 0 auto;
+}
+
+.task-description {
+}
+
+textarea {
+   resize: none;
 }
