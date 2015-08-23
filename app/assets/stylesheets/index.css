@@ -19,12 +19,17 @@ body { padding-top: 50px; }
   padding-left: 0 !important;
   padding-right: 0 !important;
 }
+textarea {
+   resize: none;
+}
 /* Блок tasks#index */
 .user-block{
   background: white;
+  height: 100% !important;
   min-height: 100% !important;
 }
-.user-block, .sidebar, .content {
+/* SIDEBAR */
+.sidebar, .content {
   height:100%;
 }
 .sidebar{
@@ -71,7 +76,4 @@ body { padding-top: 50px; }
 }
 .subtask-title ul, ol {
   margin: 5px 5px;
-}
-textarea {
-   resize: none;
 }
