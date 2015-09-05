@@ -1,5 +1,20 @@
 class Task < ActiveRecord::Base
 
+  include AASM
+
+  aasm :column => 'status' do
+    state :in_work, :initial => true
+    state :completed
+
+    event :run do
+      transitions :from => :completed, :to => :in_work
+    end
+
+    event :complete do
+      transitions :from => :in_work, :to => :completed
+    end
+  end
+
   validates :title, :priority,  presence: true
   validates :title, length: { minimum: 3 }
   validates :priority, numericality: { only_integer: true }, length: { is: 1 }

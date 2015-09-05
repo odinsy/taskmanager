@@ -7,5 +7,9 @@ Rails.application.routes.draw do
       get 'scheduled', only: [:index]
       get 'waiting', only: [:index]
     end
+    member do
+      put :run
+      put :complete
+    end
   end
 end

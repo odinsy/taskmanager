@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150823170846) do
+ActiveRecord::Schema.define(version: 20150823121508) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20150823170846) do
     t.string   "title"
     t.text     "description"
     t.integer  "priority"
-    t.boolean  "status"
+    t.string   "status"
     t.date     "scheduled"
     t.date     "deadline"
     t.integer  "user_id"

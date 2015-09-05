@@ -1,6 +1,16 @@
 class TasksController < ApplicationController
 
-  before_action :find_task, only: [:show, :edit, :update, :destroy]
+  before_action :find_task, only: [:show, :edit, :update, :destroy, :run, :complete]
+
+  def run
+    @task.run!
+    redirect_to tasks_path
+  end
+
+  def complete
+    @task.complete!
+    redirect_to tasks_path
+  end
 
   def index
     @tasks = Task.main.today
@@ -60,7 +70,7 @@ class TasksController < ApplicationController
     def task_params
       params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :project, subtasks_attributes: [:title])
     end
-    
+
     def find_task
       @task = Task.find(params[:id])
     end
