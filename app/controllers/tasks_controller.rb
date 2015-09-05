@@ -4,12 +4,12 @@ class TasksController < ApplicationController
 
   def run
     @task.run!
-    redirect_to tasks_path
+    redirect_to :back
   end
 
   def complete
     @task.complete!
-    redirect_to tasks_path
+    redirect_to :back
   end
 
   def index
@@ -26,6 +26,10 @@ class TasksController < ApplicationController
 
   def waiting
     @tasks = Task.main.waiting
+  end
+
+  def completed
+    @tasks = Task.completed
   end
 
   def show

@@ -25,10 +25,11 @@ class Task < ActiveRecord::Base
   belongs_to  :user
   belongs_to  :project
 
-  scope :main, -> { where("parent_id IS ?", nil) }
+  scope :main, -> { where(parent_id: nil, status: "in_work") }
   scope :today, -> { where("scheduled <= ?", Date.today) }
   scope :tomorrow, -> { where("scheduled == ?", Date.tomorrow) }
   scope :scheduled, -> { where("scheduled > ?", Date.tomorrow) }
   scope :waiting, -> { where("scheduled IS ?", nil) }
+  scope :completed, -> { where(status: "completed") }
 
 end
