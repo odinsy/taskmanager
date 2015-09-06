@@ -1,7 +1,5 @@
 class Task < ActiveRecord::Base
 
-  before_validation :set_subtask_priority, on: :create
-
   include AASM
 
   aasm :column => 'status' do
@@ -18,7 +16,7 @@ class Task < ActiveRecord::Base
   end
 
   validates :title, presence: true, length: { minimum: 3 }
-  validates :priority, numericality: { only_integer: true }, length: { is: 1 }
+  validates :priority, presence: true, numericality: { only_integer: true }, length: { is: 1 }
 
   has_many    :subtasks, class_name: 'Task', foreign_key: 'parent_id', dependent: :destroy
   belongs_to  :parent, class_name: 'Task'
@@ -32,13 +30,5 @@ class Task < ActiveRecord::Base
   scope :scheduled, -> { where("scheduled > ?", Date.tomorrow) }
   scope :waiting, -> { where("scheduled IS ?", nil) }
   scope :completed, -> { where(status: "completed") }
-
-  private
-
-  def set_subtask_priority
-    unless self.parent_id == nil
-      self.priority = self.parent.priority
-    end
-  end
 
 end
