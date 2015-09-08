@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
 
   before_action :find_task, only: [:show, :edit, :update, :destroy, :run, :complete]
+  rescue_from ActiveRecord::RecordNotFound, with: :invalid_task
 
   def run
     @task.run!
@@ -77,6 +78,10 @@ class TasksController < ApplicationController
 
     def find_task
       @task = Task.find(params[:id])
+    end
+
+    def invalid_task
+      redirect_to tasks_path, notice: "Invalid card!"
     end
 
 end

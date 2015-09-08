@@ -22,7 +22,12 @@ module Taskmanager
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    config.generators.test_framework = false
-    config.generators.assets = false
+
+    config.generators do |g|
+      g.test_framework  :rspec
+      g.assets = false
+      g.test_framework :rspec, fixture: true
+      g.fixture_replacement :factory_girl, dir: "spec/factories"
+    end
   end
 end
