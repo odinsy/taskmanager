@@ -1,0 +1,49 @@
+doctype html
+html[lang="ru"]
+  head
+    title
+      | ODi TaskManager
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    header.navbar.navbar-default.navbar-fixed-top
+      .container
+        .row
+          .col-md-2.user-block
+            span
+              | Username
+          .col-md-10.nav-block
+            .navbar-collapse.collapse
+              ul.nav.navbar-nav.navbar-left
+                li
+                  = link_to "Добавить задачу", new_task_path, class: "btn btn-default btn-sm navbar-left"
+    main.container
+      .row
+        aside.col-md-2.nopadding.sidebar
+          section.sidebar-title
+            span
+              | tasks
+          ul.nav.nav-pills.nav-stacked
+            li
+              = link_to "Today", tasks_path
+            li
+              = link_to "Tomorrow", tomorrow_tasks_path
+            li
+              = link_to "Scheduled", scheduled_tasks_path
+            li
+              = link_to "Waiting", waiting_tasks_path
+            li
+              = link_to "Completed", completed_tasks_path
+          section.sidebar-title
+            span
+              | projects
+          ul.nav.nav-pills.nav-stacked
+            li
+              = link_to "Project title", tasks_path
+        .col-md-10.content
+          = yield
+    footer.navbar.navbar-default.navbar-fixed-bottom
+      .container
+        .navbar-text.pull-left
+          |  © ODINSY 

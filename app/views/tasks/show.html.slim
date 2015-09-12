@@ -1,0 +1,26 @@
+.panel.panel-default
+  .panel-heading.task-head.clearfix
+    .task-priority
+      span
+        = @task.priority
+    .task-deadline
+      span
+        = @task.deadline
+  .panel-heading.task-title
+    span
+      = @task.title
+  .panel-body.task-description
+    span
+      = @task.description
+  hr
+  - @task.subtasks.each do |subtask|
+    .panel-body.subtask-title
+      ul
+        li
+          = subtask.title
+          - if subtask.in_work?
+            = link_to 'Complete', complete_task_path(subtask), method: :put
+          - else
+            = link_to 'Run', run_task_path(subtask), method: :put
+          = link_to 'Delete', [subtask], method: :delete, data: { confirm: 'Вы уверены?' }
+= render "subtask"
