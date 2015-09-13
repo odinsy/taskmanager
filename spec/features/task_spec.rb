@@ -72,7 +72,7 @@ feature "Views tasks" do
       expect(page).to_not have_content(task.title)
     end
     it "doesn't show completed task" do
-      task.update_attributes(status: "completed")
+      task.complete!
       visit tasks_path
       expect(page).to_not have_content(task.title)
     end
@@ -102,7 +102,7 @@ feature "Views tasks" do
       expect(page).to_not have_content(task.title)
     end
     it "doesn't show completed task" do
-      task.update_attributes(status: "completed")
+      task.complete!
       visit tomorrow_tasks_path
       expect(page).to_not have_content(task.title)
     end
@@ -130,7 +130,7 @@ feature "Views tasks" do
       expect(page).to_not have_content(task.title)
     end
     it "doesn't show completed task" do
-      task.update_attributes(status: "completed")
+      task.complete!
       visit tomorrow_tasks_path
       expect(page).to_not have_content(task.title)
     end
@@ -158,7 +158,7 @@ feature "Views tasks" do
       expect(page).to_not have_content(task.title)
     end
     it "doesn't show completed task" do
-      task.update_attributes(status: "completed")
+      task.complete!
       visit tomorrow_tasks_path
       expect(page).to_not have_content(task.title)
     end
