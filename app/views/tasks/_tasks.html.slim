@@ -8,6 +8,3 @@
     => link_to task.title, task_path(task)
     => link_to 'Edit', edit_task_path(task)
     = link_to 'Delete', task, method: :delete, data: { confirm: 'Вы уверены?' }
-section
-  - flash.each do |name, msg|
-    = content_tag :div, msg, class: "alert alert-info"

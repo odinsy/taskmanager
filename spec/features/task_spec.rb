@@ -1,6 +1,6 @@
 require "rails_helper"
 
-feature "Create task" do
+feature "Create a task" do
 
   context "when user trying to create a task with valid attributes" do
     it "creates the new task" do
@@ -30,7 +30,7 @@ feature "Create task" do
 
 end
 
-feature "View and edit task" do
+feature "View and edit a task" do
 
   context "when user trying to view or edit the task" do
     let!(:task) { create(:task) }
@@ -174,6 +174,31 @@ feature "Views tasks" do
       visit completed_tasks_path
       expect(page).to_not have_content task.title
     end
+  end
+
+end
+
+feature "Create a subtask" do
+
+  let!(:task) { create(:task) }
+
+  context "when user trying to create a subtask" do
+
+    before :each do
+      visit task_path(task)
+    end
+
+    it "creates a subtask with valid attributes" do
+      fill_in "Title", with: "Subtask 1"
+      click_on "Добавить подзадачу"
+      expect(page).to have_content "Subtask 1"
+    end
+    it "doesn't create a subtask with invalid attributes" do
+      fill_in "Title", with: ""
+      click_on "Добавить подзадачу"
+      expect(page).to_not have_content "123"
+    end
+
   end
 
 end

@@ -17,12 +17,13 @@ class Task < ActiveRecord::Base
 
   validates :title, presence: true, length: { minimum: 3 }
   validates :priority, presence: true, numericality: { only_integer: true }, length: { is: 1 }
+  validates_associated :subtasks
 
-  has_many    :subtasks, class_name: 'Task', foreign_key: 'parent_id', dependent: :destroy
-  belongs_to  :parent, class_name: 'Task'
-  accepts_nested_attributes_for :subtasks, allow_destroy: true
   belongs_to  :user
   belongs_to  :project
+  has_many    :subtasks, class_name: 'Task', foreign_key: 'parent_id', dependent: :destroy, autosave: true
+  belongs_to  :parent, class_name: 'Task'
+  accepts_nested_attributes_for :subtasks, allow_destroy: true
 
   scope :main, -> { where(parent_id: nil) }
   scope :in_work, -> { where(status: "in_work") }

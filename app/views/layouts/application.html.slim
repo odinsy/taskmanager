@@ -23,7 +23,7 @@ html[lang="ru"]
         aside.col-md-2.nopadding.sidebar
           section.sidebar-title
             span
-              | tasks
+              | Tasks
           ul.nav.nav-pills.nav-stacked
             li
               = link_to "Today", tasks_path
@@ -37,11 +37,14 @@ html[lang="ru"]
               = link_to "Completed", completed_tasks_path
           section.sidebar-title
             span
-              | projects
+              | Projects
           ul.nav.nav-pills.nav-stacked
             li
               = link_to "Project title", tasks_path
         .col-md-10.content
+          section
+            - flash.each do |name, msg|
+              = content_tag :div, msg, class: "alert alert-info"
           = yield
     footer.navbar.navbar-default.navbar-fixed-bottom
       .container
