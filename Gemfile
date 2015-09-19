@@ -15,6 +15,7 @@ gem 'slim-rails'
 gem 'html2slim'
 gem 'simple_form'
 gem 'aasm'
+gem "default_value_for", "~> 3.0.0"
 
 group :development, :test do
   gem 'byebug'

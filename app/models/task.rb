@@ -15,6 +15,8 @@ class Task < ActiveRecord::Base
     end
   end
 
+  default_value_for :priority, 0 
+
   belongs_to  :user
   belongs_to  :project
   has_many    :subtasks, class_name: 'Task', foreign_key: 'parent_id', dependent: :destroy

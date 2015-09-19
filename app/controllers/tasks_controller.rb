@@ -66,7 +66,7 @@ class TasksController < ApplicationController
     if @task.parent_id?
       redirect_to @task.parent
     else
-      redirect_to tasks_path
+      redirect_to :back
     end
   end
 
