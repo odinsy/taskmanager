@@ -1,5 +1,9 @@
 .panel.panel-default
   .panel-heading.task-title
+    - if @project.active?
+      => link_to 'Complete', complete_project_path(@project), method: :put
+    - else
+      => link_to 'Run', run_project_path(@project), method: :put
     span
       = @project.title
   .panel-body.task-description

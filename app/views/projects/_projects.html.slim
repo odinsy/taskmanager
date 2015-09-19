@@ -1,0 +1,4 @@
+- @projects.each do |project|
+  li.list-group-item
+    => link_to project.title, project_path(project)
+    = project.tasks.in_work.count
