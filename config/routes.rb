@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'main#index'
 
+  resources :projects
   resources :tasks do
     collection do
       get :tomorrow, only: [:index]

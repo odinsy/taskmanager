@@ -1,0 +1,6 @@
+= simple_form_for @project do |p|
+  = p.simple_fields_for :tasks, @project.tasks.build do |f|
+    .form-inputs
+      = f.input :title
+    .form-actions
+      = f.button  :submit, "Добавить задачу"

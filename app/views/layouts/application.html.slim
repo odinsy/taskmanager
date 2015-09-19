@@ -40,7 +40,8 @@ html[lang="ru"]
               | Projects
           ul.nav.nav-pills.nav-stacked
             li
-              = link_to "Project title", tasks_path
+              - @projects.each do |project|
+                = link_to project.title, project_path(project)
         .col-md-10.content
           section
             - flash.each do |name, msg|
