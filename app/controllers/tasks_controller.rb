@@ -46,11 +46,9 @@ class TasksController < ApplicationController
   def create
     @task = Task.create(task_params)
     if @task.errors.empty?
-      flash[:alert] = "Task created!"
-      redirect_to tasks_path
+      redirect_to tasks_path, notice: "Task created!"
     else
-      flash[:alert] = "Invalid input!"
-      render 'new'
+      render 'new', notice: "Invalid input!"
     end
   end
 
