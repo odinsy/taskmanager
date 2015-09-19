@@ -1,0 +1,37 @@
+.panel.panel-default
+  .panel-heading.task-title
+    span
+      = @project.title
+  .panel-body.task-description
+    span
+      = @project.description
+
+- if @project.tasks.in_work.any?
+  .panel.panel-default
+    .panel-heading.task-title
+      span
+        | Next
+    - @project.tasks.in_work.each do |task|
+      .panel-body.subtask-title
+        ul
+          li
+            => link_to 'Complete', complete_task_path(task), method: :put
+            => task.title
+            => link_to 'Edit', edit_task_path(task)
+            = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
+
+- if @project.tasks.completed.any?          
+  .panel.panel-default
+    .panel-heading.task-title
+      span
+        | Completed
+    - @project.tasks.completed.each do |task|
+      .panel-body.subtask-title
+        ul
+          li
+            => link_to 'Run', run_task_path(task), method: :put
+            => task.title
+            => link_to 'Edit', edit_task_path(task)
+            = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
+          
+= render 'task_fields'
