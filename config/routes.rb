@@ -1,7 +1,17 @@
 Rails.application.routes.draw do
+
   root 'main#index'
 
-  resources :projects
+  resources :projects do
+    collection do
+      get :completed, only: [:index]
+    end
+    member do
+      put :run
+      put :complete
+    end
+  end
+
   resources :tasks do
     collection do
       get :tomorrow, only: [:index]
@@ -14,4 +24,5 @@ Rails.application.routes.draw do
       put :complete
     end
   end
+
 end

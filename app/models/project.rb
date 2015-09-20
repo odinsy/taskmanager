@@ -1,5 +1,18 @@
 class Project < ActiveRecord::Base
 
+  include AASM
+
+  aasm :column => 'state' do
+    state :active, :initial => true
+    state :completed
+    event :run do
+      transitions :from => :completed, :to => :active
+    end
+    event :complete do
+      transitions :from => :active, :to => :completed
+    end
+  end
+
   belongs_to  :user
   has_many    :tasks
 

@@ -1,6 +1,24 @@
 class ProjectsController < ApplicationController
 
-  before_action :find_project, only: [:show, :edit, :update, :destroy]
+  before_action :find_project, only: [:run, :complete, :show, :edit, :update, :destroy]
+
+  def run
+    @project.run!
+    redirect_to :back
+  end
+
+  def complete
+    @project.complete!
+    redirect_to :back
+  end
+
+  def index
+    @projects = Project.all
+  end
+
+  def completed
+    @projects = Project.completed
+  end
 
   def new
     @project = Project.new
