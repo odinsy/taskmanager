@@ -1,4 +1,9 @@
 .panel.panel-default
+  - if @project.deadline?
+    .panel-heading.task-head.clearfix
+      .task-deadline
+        span
+          = @project.deadline
   .panel-heading.task-title
     - if @project.active?
       => link_to 'Complete', complete_project_path(@project), method: :put
