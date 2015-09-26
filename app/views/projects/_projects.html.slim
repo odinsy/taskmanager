@@ -1,4 +1,6 @@
 - @projects.each do |project|
   li.list-group-item
     => link_to project.title, project_path(project)
+    => link_to "Edit", edit_project_path(project)
+    => link_to "Delete", project, method: :delete, data: { confirm: 'Вы уверены?' }
     = project.tasks.in_work.count
