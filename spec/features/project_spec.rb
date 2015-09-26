@@ -39,6 +39,7 @@ feature "View and edit the project" do
 end
 
 feature "view the projects" do
+  let!(:project) { create(:project) }
   context "when the user has completed the project" do
     before :each do
       visit project_path(project)
