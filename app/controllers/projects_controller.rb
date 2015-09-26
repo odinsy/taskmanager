@@ -4,16 +4,16 @@ class ProjectsController < ApplicationController
 
   def run
     @project.run!
-    redirect_to :back
+    redirect_to projects_path
   end
 
   def complete
     @project.complete!
-    redirect_to :back
+    redirect_to projects_path
   end
 
   def index
-    @projects = Project.all
+    @projects = Project.active
   end
 
   def completed
@@ -49,6 +49,8 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    @project.destroy
+    redirect_to projects_path
   end
 
   private
@@ -58,7 +60,7 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-      params.require(:project).permit(:title, :description, tasks_attributes: [:title, :priority])
+      params.require(:project).permit(:title, :description, :scheduled, :deadline, tasks_attributes: [:title, :priority])
     end
 
 end
