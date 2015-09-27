@@ -16,6 +16,7 @@ gem 'html2slim'
 gem 'simple_form'
 gem 'aasm'
 gem "default_value_for", "~> 3.0.0"
+gem 'sorcery'
 
 group :development, :test do
   gem 'byebug'

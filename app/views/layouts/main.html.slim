@@ -1,0 +1,29 @@
+doctype html
+html[lang="ru"]
+  head
+    title
+      | ODi TaskManager
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    header.navbar.navbar-default.navbar-fixed-top
+      .container
+        nav.collapse.navbar-collapse#bs-example-navbar-collapse-1
+          ul.nav.navbar-nav.navbar-right
+            - if current_user
+              li
+                = link_to "Log Out", logout_path, method: :delete
+            - else 
+              li
+                = link_to "Log In", login_path
+              li
+                = link_to "Sign up", sign_up_path
+                              
+    main.container
+      .row
+        = yield
+    footer.navbar.navbar-default.navbar-fixed-bottom
+      .container
+        .navbar-text.pull-left
+          |  © ODINSY 

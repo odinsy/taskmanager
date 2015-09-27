@@ -1,0 +1,5 @@
+= simple_form_for(:registration, url: registrations_path) do |f|
+  = f.input :email
+  = f.input :password
+  = f.input :password_confirmation
+  = f.submit "Register", class: 'btn btn-primary btn-lg'
