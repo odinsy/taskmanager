@@ -11,7 +11,7 @@ class RegistrationsController < ApplicationController
     @user = User.create(user_params)
     if @user.errors.empty?
       auto_login(@user)
-      redirect_to root_path, notice: "The user was successfully created!"
+      redirect_to tasks_path, notice: "The user was successfully created!"
     else
       render "new"
     end
