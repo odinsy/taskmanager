@@ -27,6 +27,11 @@ html[lang="ru"]
                   = link_to "Add Task", new_task_path
                 li
                   = link_to "Add Project", new_project_path
+            ul.nav.navbar-nav.navbar-right
+              - if current_user
+                li
+                  = link_to "Log Out", logout_path, method: :delete      
+                  
     main.container
       .row
         aside.col-md-2.nopadding.sidebar
@@ -49,10 +54,6 @@ html[lang="ru"]
                 span
                   .glyphicon.glyphicon-menu-right
                   = link_to "Projects", projects_path
-          ul.nav.nav-pills.nav-stacked
-            li
-              - @proj.each do |project|
-                = link_to project.title, project_path(project)
           section.sidebar-title
             span
               .glyphicon.glyphicon-menu-right
