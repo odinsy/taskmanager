@@ -54,6 +54,11 @@ html[lang="ru"]
                 span
                   .glyphicon.glyphicon-menu-right
                   = link_to "Projects", projects_path
+                  
+          ul.nav.nav-pills.nav-stacked
+            li
+              - current_user.projects(true).each do |project|
+                = link_to project.title, project_path(project)
           section.sidebar-title
             span
               .glyphicon.glyphicon-menu-right
