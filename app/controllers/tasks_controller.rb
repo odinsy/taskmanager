@@ -14,38 +14,42 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.main.in_work.today
+    @tasks = current_user.tasks.main.active.today
   end
 
   def tomorrow
-    @tasks = Task.main.in_work.tomorrow
+    @tasks = current_user.tasks.main.active.tomorrow
   end
 
   def scheduled
-    @tasks = Task.main.in_work.scheduled
+    @tasks = current_user.tasks.main.active.scheduled
   end
 
   def waiting
-    @tasks = Task.main.in_work.waiting
+    @tasks = current_user.tasks.main.active.waiting
   end
 
   def completed
-    @tasks = Task.main.completed
+    @tasks = current_user.tasks.main.completed
   end
 
   def show
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.build
   end
 
   def edit
   end
 
   def create
-    @task = Task.create(task_params)
-    if @task.errors.empty?
+    @task = current_user.tasks.create(task_params)
+    if @task.project_id and @task.errors.empty?
+      redirect_to @task.project, notice: "Task created!"
+    elsif @task.project_id and @task.errors
+      redirect_to @task.project
+    elsif @task.errors.empty?
       redirect_to tasks_path, notice: "Task created!"
     else
       render 'new', notice: "Invalid input!"
@@ -54,7 +58,7 @@ class TasksController < ApplicationController
 
   def update
     @task.update_attributes(task_params)
-    if @task.errors.empty? || :subtasks_attributes?
+    if @task.errors.empty? || task_params[:subtasks_attributes]
       redirect_to @task
     else
       render 'edit'
@@ -73,11 +77,11 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :project, subtasks_attributes: [:title, :priority])
+      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, subtasks_attributes: [:title, :user_id])
     end
 
     def find_task
-      @task = Task.find(params[:id])
+      @task = current_user.tasks.find(params[:id])
     end
 
     def invalid_task

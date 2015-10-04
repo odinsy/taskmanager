@@ -1,5 +1,9 @@
 class MainController < ApplicationController
+
+  skip_before_filter :require_login
+  layout 'main'
+
   def index
-    render layout: false
   end
+
 end

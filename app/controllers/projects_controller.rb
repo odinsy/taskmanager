@@ -13,15 +13,15 @@ class ProjectsController < ApplicationController
   end
 
   def index
-    @projects = Project.active
+    @projects = current_user.projects.active
   end
 
   def completed
-    @projects = Project.completed
+    @projects = current_user.projects.completed
   end
 
   def new
-    @project = Project.new
+    @project = current_user.projects.build
   end
 
   def show
@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    @project = Project.create(project_params)
+    @project = current_user.projects.create(project_params)
     if @project.errors.empty?
       redirect_to tasks_path
     else
@@ -50,17 +50,17 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path
+    redirect_to :back
   end
 
   private
 
     def find_project
-      @project = Project.find(params[:id])
+      @project = current_user.projects.find(params[:id])
     end
 
     def project_params
-      params.require(:project).permit(:title, :description, :scheduled, :deadline, tasks_attributes: [:title, :priority])
+      params.require(:project).permit(:title, :description, :scheduled, :deadline, tasks_attributes: [:title, :user_id])
     end
 
 end

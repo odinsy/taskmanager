@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
 
-  protect_from_forgery with: :exception
-  before_action :set_layout_variables
+  before_filter :require_login
 
-  def set_layout_variables
-    @proj = Project.active
+  protect_from_forgery with: :exception
+
+  private
+
+  def not_authenticated
+    flash[:warning] = 'You have to authenticate to access this page.'
+    redirect_to login_path
   end
 
 end

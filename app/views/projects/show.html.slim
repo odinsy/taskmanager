@@ -1,3 +1,6 @@
+- @project.errors.full_messages.each do |message|
+    = message
+
 .panel.panel-default
   - if @project.deadline?
     .panel-heading.task-head.clearfix
@@ -15,12 +18,12 @@
     span
       = @project.description
 
-- if @project.tasks.in_work.any?
+- if @project.tasks.active.any?
   .panel.panel-default
     .panel-heading.task-title
       span
         | Next
-    - @project.tasks.in_work.each do |task|
+    - @project.tasks.active.each do |task|
       .panel-body.subtask-title
         ul
           li
@@ -43,4 +46,4 @@
             => link_to 'Edit', edit_task_path(task)
             = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
           
-= render 'task_fields'
+= render 'task_form'

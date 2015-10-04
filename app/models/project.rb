@@ -15,9 +15,9 @@ class Project < ActiveRecord::Base
 
   belongs_to  :user
   has_many    :tasks
-
-  accepts_nested_attributes_for :tasks, allow_destroy: true
+  accepts_nested_attributes_for :tasks, allow_destroy: true, limit: 1
 
   validates :title, presence: true, length: { minimum: 3 }
+  validates :user_id, presence: true
 
 end

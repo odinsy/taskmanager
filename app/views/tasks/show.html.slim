@@ -17,7 +17,7 @@
     .panel-body.subtask-title
       ul
         li
-          - if subtask.in_work?
+          - if subtask.active?
             => link_to 'Complete', complete_task_path(subtask), method: :put
           - else
             => link_to 'Run', run_task_path(subtask), method: :put
