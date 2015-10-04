@@ -1,8 +1,9 @@
 - current_user.errors.full_messages.each do |msg|
   li
     = msg
+    
 = simple_form_for(:profile, url: profile_path(current_user), method: "put") do |f|
-  = f.input :email, required: true
+  = f.input :name, required: true
   = f.input :password, required: true
   = f.input :password_confirmation, required: true
   = f.submit "Обновить профиль", class: 'btn btn-primary btn-lg'
