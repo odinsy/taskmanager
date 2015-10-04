@@ -40,9 +40,8 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    puts project_params
     @project.update_attributes(project_params)
-    if @project.errors.empty? || :tasks_attributes?
+    if @project.errors.empty?
       redirect_to @project
     else
       render 'edit'
