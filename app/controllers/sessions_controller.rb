@@ -9,16 +9,16 @@ class SessionsController < ApplicationController
   def create
     if login(params[:session][:email], params[:session][:password])
       flash[:success] = "Login successful"
-      redirect_to tasks_path
+      redirect_back_or_to tasks_path
     else
-      flash[:alert] = "Login failed"
+      flash[:alert] = "Email or password was invalid!"
       render "new"
     end
   end
 
   def destroy
     logout
-    redirect_back_or_to root_path
+    redirect_to root_path
   end
 
 end
