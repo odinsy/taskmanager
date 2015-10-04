@@ -5,4 +5,4 @@
       => link_to "Edit", edit_project_path(project)
       => link_to "Delete", project, method: :delete, data: { confirm: 'Вы уверены?' }
     span.badge
-      = project.tasks.in_work.count 
+      = project.tasks.active.count 

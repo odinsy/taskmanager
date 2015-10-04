@@ -14,19 +14,19 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = current_user.tasks.main.in_work.today
+    @tasks = current_user.tasks.main.active.today
   end
 
   def tomorrow
-    @tasks = current_user.tasks.main.in_work.tomorrow
+    @tasks = current_user.tasks.main.active.tomorrow
   end
 
   def scheduled
-    @tasks = current_user.tasks.main.in_work.scheduled
+    @tasks = current_user.tasks.main.active.scheduled
   end
 
   def waiting
-    @tasks = current_user.tasks.main.in_work.waiting
+    @tasks = current_user.tasks.main.active.waiting
   end
 
   def completed

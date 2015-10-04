@@ -18,12 +18,12 @@
     span
       = @project.description
 
-- if @project.tasks.in_work.any?
+- if @project.tasks.active.any?
   .panel.panel-default
     .panel-heading.task-title
       span
         | Next
-    - @project.tasks.in_work.each do |task|
+    - @project.tasks.active.each do |task|
       .panel-body.subtask-title
         ul
           li
