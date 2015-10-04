@@ -1,4 +1,8 @@
+- flash.each do |name, msg|
+  .alert.alert-info
+    = msg
 = simple_form_for(:registration, url: registrations_path) do |f|
+  = f.error_notification
   = f.input :email
   = f.input :password
   = f.input :password_confirmation

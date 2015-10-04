@@ -11,8 +11,10 @@ class RegistrationsController < ApplicationController
     @user = User.create(user_params)
     if @user.errors.empty?
       auto_login(@user)
-      redirect_to tasks_path, notice: "The user was successfully created!"
+      flash[:success] = "The user was successfully created!"
+      redirect_to tasks_path
     else
+      flash[:alert] = "Registration failed!"
       render "new"
     end
   end

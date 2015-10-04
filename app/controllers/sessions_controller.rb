@@ -8,9 +8,11 @@ class SessionsController < ApplicationController
 
   def create
     if login(params[:session][:email], params[:session][:password])
-      redirect_to tasks_path, notice: "Login successful"
+      flash[:success] = "Login successful"
+      redirect_to tasks_path
     else
-      render "new", notice: "Login failed!"
+      flash[:alert] = "Login failed"
+      render "new"
     end
   end
 
