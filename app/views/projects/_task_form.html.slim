@@ -1,0 +1,7 @@
+= simple_form_for [@project, @project.tasks.build] do |f|
+  = f.error_notification
+  .form-inputs
+    = f.hidden_field :project_id, value: @project.id
+    = f.input :title
+  .form-actions
+    = f.button :submit, "Добавить задачу"

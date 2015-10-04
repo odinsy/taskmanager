@@ -1,3 +1,6 @@
+- @project.errors.full_messages.each do |message|
+    = message
+
 .panel.panel-default
   - if @project.deadline?
     .panel-heading.task-head.clearfix
@@ -43,4 +46,4 @@
             => link_to 'Edit', edit_task_path(task)
             = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
           
-= render 'task_fields'
+= render 'task_form'
