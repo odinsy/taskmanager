@@ -15,7 +15,7 @@ class Task < ActiveRecord::Base
     end
   end
 
-  default_value_for :priority, 0 
+  default_value_for :priority, 0
 
   belongs_to  :user
   belongs_to  :project
@@ -25,6 +25,7 @@ class Task < ActiveRecord::Base
 
   validates :title, presence: true, length: { minimum: 3 }
   validates :priority, presence: true, numericality: { only_integer: true }, length: { is: 1 }
+  validates :user_id, presence: true
   validates_associated :subtasks
 
   scope :main, -> { where(parent_id: nil) }
