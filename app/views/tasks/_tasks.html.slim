@@ -1,10 +1,13 @@
 - @tasks.each do |task|
   li.list-group-item
-    => task.priority
-    - if task.active?
-      => link_to 'Complete', complete_task_path(task), method: :put
-    - else
-      => link_to 'Run', run_task_path(task), method: :put
-    => link_to task.title, task_path(task)
-    => link_to 'Edit', edit_task_path(task)
-    = link_to 'Delete', task, method: :delete, data: { confirm: 'Вы уверены?' }
+    span
+      => task.priority
+      - if task.active?
+        => link_to 'Complete', complete_task_path(task), method: :put
+      - else
+        => link_to 'Run', run_task_path(task), method: :put
+      => link_to task.title, task_path(task)
+      => link_to 'Edit', edit_task_path(task)
+      = link_to 'Delete', task, method: :delete, data: { confirm: 'Вы уверены?' }
+    span.badge
+      = task.subtasks.active.count 

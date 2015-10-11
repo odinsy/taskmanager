@@ -48,7 +48,7 @@ class TasksController < ApplicationController
     if @task.project_id and @task.errors.empty?
       redirect_to @task.project, notice: "Task created!"
     elsif @task.project_id and @task.errors
-      redirect_to @task.project
+      redirect_to @task.project, notice: "Invalid input!"
     elsif @task.errors.empty?
       redirect_to tasks_path, notice: "Task created!"
     else
@@ -58,8 +58,8 @@ class TasksController < ApplicationController
 
   def update
     @task.update_attributes(task_params)
-    if @task.errors.empty? || task_params[:subtasks_attributes]
-      redirect_to @task
+    if task_params[:subtasks_attributes] or @task.errors.empty?
+      redirect_to task_path
     else
       render 'edit'
     end
