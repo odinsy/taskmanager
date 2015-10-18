@@ -38,9 +38,11 @@ class TasksController < ApplicationController
 
   def new
     @task = current_user.tasks.build
+    session[:return_to] = request.referer
   end
 
   def edit
+    session[:return_to] = request.referer
   end
 
   def create
@@ -48,10 +50,20 @@ class TasksController < ApplicationController
       @project = current_user.projects.find(params[:project_id])
       @task = @project.tasks.create(task_params)
       if @task.errors.empty?
-        redirect_to @project, notice: "Task created!"
+        flash.now[:notice] = "Task created!"
       else
-        redirect_to @project, notice: "Invalid input!"
+        flash.now[:notice] = "Invalid input!"
       end
+      redirect_to @project
+    elsif task_params[:parent_id]
+      @task = current_user.tasks.find(task_params[:parent_id])
+      @subtask = @task.subtasks.create(task_params)
+      if @subtask.errors.empty?
+        flash.now[:notice] = "Task created!"
+      else
+        flash.now[:notice] = "Invalid input!"
+      end
+      redirect_to @task
     else
       @task = current_user.tasks.create(task_params)
       if @task.errors.empty?
@@ -64,8 +76,8 @@ class TasksController < ApplicationController
 
   def update
     @task.update_attributes(task_params)
-    if task_params[:subtasks_attributes] or @task.errors.empty?
-      redirect_to task_path
+    if @task.errors.empty?
+      redirect_to session.delete(:return_to)
     else
       render 'edit'
     end
@@ -83,7 +95,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, subtasks_attributes: [:title, :user_id]).deep_merge!(user_id: current_user.id)
+      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, :parent_id).deep_merge!(user_id: current_user.id)
     end
 
     def find_task
