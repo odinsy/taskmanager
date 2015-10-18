@@ -19,7 +19,7 @@ class Task < ActiveRecord::Base
   belongs_to  :project, inverse_of: :tasks
   has_many    :subtasks, class_name: 'Task', foreign_key: 'parent_id', dependent: :destroy
   belongs_to  :parent, class_name: 'Task'
-  accepts_nested_attributes_for :subtasks, allow_destroy: true
+  accepts_nested_attributes_for :subtasks, reject_if: :all_blank, allow_destroy: true
 
   validates :title, presence: true, length: { minimum: 3 }
   validates :priority, presence: true, numericality: { only_integer: true }, length: { is: 1 }

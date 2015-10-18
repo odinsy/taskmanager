@@ -44,15 +44,21 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = current_user.tasks.create(task_params)
-    if @task.project_id and @task.errors.empty?
-      redirect_to @task.project, notice: "Task created!"
-    elsif @task.project_id and @task.errors
-      redirect_to @task.project, notice: "Invalid input!"
-    elsif @task.errors.empty?
-      redirect_to tasks_path, notice: "Task created!"
+    if params[:project_id]
+      @project = current_user.projects.find(params[:project_id])
+      @task = @project.tasks.create(task_params)
+      if @task.errors.empty?
+        redirect_to @project, notice: "Task created!"
+      else
+        redirect_to @project, notice: "Invalid input!"
+      end
     else
-      render 'new', notice: "Invalid input!"
+      @task = current_user.tasks.create(task_params)
+      if @task.errors.empty?
+        redirect_to tasks_path, notice: "Task created!"
+      else
+        render 'new', notice: "Invalid input!"
+      end
     end
   end
 
@@ -77,7 +83,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, subtasks_attributes: [:title, :user_id])
+      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, subtasks_attributes: [:title, :user_id]).deep_merge!(user_id: current_user.id)
     end
 
     def find_task
