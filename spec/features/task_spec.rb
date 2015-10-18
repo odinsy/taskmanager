@@ -251,13 +251,13 @@ feature "Create a subtask" do
 
     it "creates a subtask with valid attributes" do
       fill_in "Title", with: "Subtask 1"
-      click_on "Добавить подзадачу"
+      click_on "Add Subtask"
       expect(page).to have_content "Subtask 1"
     end
 
     it "doesn't create a subtask with invalid attributes" do
       fill_in "Title", with: "12"
-      click_on "Добавить подзадачу"
+      click_on "Add Subtask"
       expect(page).to_not have_content "12"
     end
 

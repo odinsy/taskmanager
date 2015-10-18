@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.create(project_params)
     if @project.errors.empty?
-      redirect_to tasks_path
+      redirect_to @project
     else
       render 'new'
     end
