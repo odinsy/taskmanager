@@ -1,6 +1,5 @@
-= simple_form_for @task.subtasks.build do |f|
+= simple_form_for [@task, @task.subtasks.build], url: task_subtasks_path(@task) do |f|
   .form-inputs
-    = f.hidden_field :parent_id, value: @task.id
     = f.input :title
   .form-actions
     = f.button :submit, "Add Subtask"

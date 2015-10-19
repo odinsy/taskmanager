@@ -45,30 +45,27 @@ class TasksController < ApplicationController
   end
 
   def create
-    if params[:project_id]
-      @project = current_user.projects.find(params[:project_id])
-      @task = @project.tasks.create(task_params)
-      if @task.errors.empty?
-        flash.now[:notice] = "Task created!"
+    @task = current_user.tasks.create(task_params) do |t|
+      t.project = project if project_present
+      t.parent = parent if parent_present
+    end
+    if @task.errors.empty?
+      flash.now[:notice] = "Task created!"
+      if project_present
+        redirect_to @task.project
+      elsif parent_present
+        redirect_to @task.parent
       else
-        flash.now[:notice] = "Invalid input!"
+        redirect_to tasks_path
       end
-      redirect_to @project
-    elsif task_params[:parent_id]
-      @task = current_user.tasks.find(task_params[:parent_id])
-      @subtask = @task.subtasks.create(task_params)
-      if @subtask.errors.empty?
-        flash.now[:notice] = "Task created!"
-      else
-        flash.now[:notice] = "Invalid input!"
-      end
-      redirect_to @task
     else
-      @task = current_user.tasks.create(task_params)
-      if @task.errors.empty?
-        redirect_to tasks_path, notice: "Task created!"
+      flash.now[:notice] = "Invalid input!"
+      if project_present
+        redirect_to @task.project
+      elsif parent_present
+        redirect_to @task.parent
       else
-        render 'new', notice: "Invalid input!"
+        render 'new'
       end
     end
   end
@@ -94,7 +91,7 @@ class TasksController < ApplicationController
   private
 
     def task_params
-      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, :parent_id).deep_merge!(user_id: current_user.id)
+      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, :parent_id).deep_merge!(user_id: current_user.id, parent_id: params[:task_id])
     end
 
     def find_task
@@ -103,6 +100,24 @@ class TasksController < ApplicationController
 
     def invalid_task
       redirect_to tasks_path, notice: "Invalid task!"
+    end
+
+    def parent
+     return unless parent_present
+     Task.find(params[:task_id])
+    end
+
+    def project
+      return unless project_present
+      Project.find(params[:project_id])
+    end
+
+    def parent_present
+      params[:task_id].present?
+    end
+
+    def project_present
+      params[:project_id].present?
     end
 
 end

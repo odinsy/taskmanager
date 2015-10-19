@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :profile, only: [:edit, :show, :update]
 
   resources :tasks do
+    resources :subtasks, only: [:new, :create], controller: :tasks
     collection do
       get :tomorrow, only: [:index]
       get :scheduled, only: [:index]
