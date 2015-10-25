@@ -1,4 +1,4 @@
-= simple_form_for [@project, @project.tasks.build] do |f|
+= simple_form_for [@project, @project.tasks.build], remote: true do |f|
   .form-inputs
     = f.input :title
   .form-actions

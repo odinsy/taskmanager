@@ -1,24 +1,9 @@
-.panel.panel-default
-  .panel-heading.task-head.clearfix
-    .task-priority
-      span
-        = @task.priority
-    .task-deadline
-      span
-        = @task.deadline
-  .panel-heading.task-title
-    span
-      = @task.title
-  .panel-body.task-description
-    span
-      = @task.description
-
-- if @task.subtasks.active.any?
-  .panel.panel-default.subtasks
+- if @project.tasks.active.any?
+  .panel.panel-default
     .panel-heading.task-title
       span
         | Next
-    - @task.subtasks.active.each do |task|
+    - @project.tasks.active.each do |task|
       .panel-body.subtask-title
         ul
           li
@@ -27,12 +12,12 @@
             => link_to 'Edit', edit_task_path(task)
             = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
 
-- if @task.subtasks.completed.any?          
-  .panel.panel-default.subtasks
+- if @project.tasks.completed.any?          
+  .panel.panel-default
     .panel-heading.task-title
       span
         | Completed
-    - @task.subtasks.completed.each do |task|
+    - @project.tasks.completed.each do |task|
       .panel-body.subtask-title
         ul
           li
@@ -40,5 +25,3 @@
             => task.title
             => link_to 'Edit', edit_task_path(task)
             = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
-
-= render "subtask_form"
