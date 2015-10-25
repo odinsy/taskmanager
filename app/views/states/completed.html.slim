@@ -1,0 +1,24 @@
+- @projects.each do |project|
+  li.list-group-item
+    span
+      => link_to 'Run', run_project_path(project), method: :put
+      => link_to project.title, project_path(project)
+      => link_to "Edit", edit_project_path(project)
+      => link_to "Delete", project, method: :delete, data: { confirm: 'Вы уверены?' }
+    span.badge
+      = project.tasks.active.count 
+
+
+- @tasks.each do |task|
+  li.list-group-item
+    span
+      => task.priority
+      - if task.active?
+        => link_to 'Complete', complete_task_path(task), method: :put
+      - else
+        => link_to 'Run', run_task_path(task), method: :put
+      => link_to task.title, task_path(task)
+      => link_to 'Edit', edit_task_path(task)
+      = link_to 'Delete', task, method: :delete, data: { confirm: 'Вы уверены?' }
+    span.badge
+      = task.subtasks.active.count 

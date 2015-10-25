@@ -4,20 +4,16 @@ class ProjectsController < ApplicationController
 
   def run
     @project.run!
-    redirect_to projects_path
+    redirect_to :back
   end
 
   def complete
     @project.complete!
-    redirect_to projects_path
+    redirect_to :back
   end
 
   def index
     @projects = current_user.projects.active
-  end
-
-  def completed
-    @projects = current_user.projects.completed
   end
 
   def new

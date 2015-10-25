@@ -2,6 +2,7 @@ class TasksController < ApplicationController
 
   before_action :find_task, only: [:show, :edit, :update, :destroy, :run, :complete]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_task
+  respond_to :html, :js
 
   def run
     @task.run!
@@ -15,22 +16,6 @@ class TasksController < ApplicationController
 
   def index
     @tasks = current_user.tasks.main.active.today
-  end
-
-  def tomorrow
-    @tasks = current_user.tasks.main.active.tomorrow
-  end
-
-  def scheduled
-    @tasks = current_user.tasks.main.active.scheduled
-  end
-
-  def waiting
-    @tasks = current_user.tasks.main.active.waiting
-  end
-
-  def completed
-    @tasks = current_user.tasks.main.completed
   end
 
   def show
@@ -81,17 +66,13 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    if @task.parent_id?
-      redirect_to @task.parent
-    else
-      redirect_to :back
-    end
+    redirect_to :back
   end
 
   private
 
     def task_params
-      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, :parent_id).deep_merge!(user_id: current_user.id, parent_id: params[:task_id])
+      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, :parent_id)
     end
 
     def find_task

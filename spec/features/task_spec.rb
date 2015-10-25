@@ -224,12 +224,12 @@ feature "Views tasks" do
 
     it "shows their" do
       task.complete!
-      visit completed_tasks_path
+      visit completed_path
       expect(page).to have_content task.title
     end
 
     it "doesn't show 'active' task" do
-      visit completed_tasks_path
+      visit completed_path
       expect(page).to_not have_content task.title
     end
 
