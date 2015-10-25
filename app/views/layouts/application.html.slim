@@ -76,9 +76,7 @@ html[lang="ru"]
               | Done
           ul.nav.nav-pills.nav-stacked
             li
-              = link_to "Completed Tasks", completed_tasks_path
-            li
-              = link_to "Completed Projects", completed_projects_path
+              = link_to "Completed", completed_path
         .col-md-10.content
           section
             - flash.each do |name, msg|
