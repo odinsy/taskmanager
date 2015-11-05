@@ -10,7 +10,6 @@ class CreateTasks < ActiveRecord::Migration
       t.integer :user_id
       t.integer :project_id
 
-      t.references  :parent, index: true
       t.timestamps null: false
     end
   end

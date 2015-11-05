@@ -4,8 +4,9 @@ class User < ActiveRecord::Base
 
   authenticates_with_sorcery!
 
-  has_many :projects, inverse_of: :user
-  has_many :tasks, inverse_of: :user
+  has_many :projects
+  has_many :tasks
+  has_many :subtasks, through: :tasks
 
   validates :email, presence: true, uniqueness: true
   validates :name, presence: true, length: 3..15
