@@ -15,7 +15,7 @@ class TasksController < ApplicationController
   end
 
   def index
-    @tasks = current_user.tasks.main.active.today
+    @tasks = current_user.tasks.active.today
   end
 
   def show
@@ -32,25 +32,21 @@ class TasksController < ApplicationController
   def create
     @task = current_user.tasks.create(task_params) do |t|
       t.project = project if project_present
-      t.parent = parent if parent_present
     end
-    if @task.errors.empty?
-      flash.now[:notice] = "Task created!"
-      if project_present
-        redirect_to @task.project
-      elsif parent_present
-        redirect_to @task.parent
+    respond_to do |format|
+      if @task.errors.empty?
+        if project_present
+          @project = @task.project
+          format.js
+        else
+          format.html { redirect_to tasks_path, notice: "Task created!" }
+        end
       else
-        redirect_to tasks_path
-      end
-    else
-      flash.now[:notice] = "Invalid input!"
-      if project_present
-        redirect_to @task.project
-      elsif parent_present
-        redirect_to @task.parent
-      else
-        render 'new'
+        if project_present
+          @project = @task.project
+        else
+          format.html { render 'new', notice: "Could not save task" }
+        end
       end
     end
   end
@@ -65,14 +61,17 @@ class TasksController < ApplicationController
   end
 
   def destroy
-    @task.destroy
-    redirect_to :back
+    respond_to do |format|
+      @task.destroy
+      format.html { redirect_to(:back) }
+      format.js
+    end
   end
 
   private
 
     def task_params
-      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id, :parent_id)
+      params.require(:task).permit(:title, :description, :scheduled, :deadline, :priority, :user_id, :project_id)
     end
 
     def find_task
@@ -83,18 +82,9 @@ class TasksController < ApplicationController
       redirect_to tasks_path, notice: "Invalid task!"
     end
 
-    def parent
-     return unless parent_present
-     Task.find(params[:task_id])
-    end
-
     def project
       return unless project_present
       Project.find(params[:project_id])
-    end
-
-    def parent_present
-      params[:task_id].present?
     end
 
     def project_present
