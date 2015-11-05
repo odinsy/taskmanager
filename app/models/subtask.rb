@@ -5,5 +5,6 @@ class Subtask < ActiveRecord::Base
 
   validates :title, presence: true, length: { minimum: 1 }
   validates :user_id, presence: true
+  validates :task_id, presence: true
 
 end
