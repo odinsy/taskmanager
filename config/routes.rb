@@ -14,7 +14,12 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy", as: :logout
 
   resources :tasks do
-    resources :subtasks, only: [:new, :create], controller: :tasks
+    resources :subtasks, only: [:create, :destroy], shallow: true do
+      member do
+        put :run
+        put :complete
+      end
+    end
     collection do
       get :tomorrow,  controller: :task_schedules
       get :scheduled, controller: :task_schedules

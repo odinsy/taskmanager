@@ -1,0 +1,25 @@
+- if @task.subtasks.active.any?
+  .panel.panel-default
+    .panel-heading.task-title
+      span
+        | Next
+    - @task.subtasks.active.each do |subtask|
+      .panel-body.subtask-title
+        ul
+          li
+            => link_to 'Complete', complete_subtask_path(subtask), method: :put
+            => subtask.title
+            = link_to 'Delete', [subtask], method: :delete, data: { confirm: 'Вы уверены?' }
+
+- if @task.subtasks.completed.any?          
+  .panel.panel-default
+    .panel-heading.task-title
+      span
+        | Completed
+    - @task.subtasks.completed.each do |subtask|
+      .panel-body.subtask-title
+        ul
+          li
+            => link_to 'Run', run_subtask_path(subtask), method: :put
+            => subtask.title
+            = link_to 'Delete', [subtask], method: :delete, data: { confirm: 'Вы уверены?' }
