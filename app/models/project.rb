@@ -13,11 +13,11 @@ class Project < ActiveRecord::Base
     end
   end
 
-  belongs_to  :user, inverse_of: :projects
-  has_many    :tasks, inverse_of: :project, validate: true
+  belongs_to  :user
+  has_many    :tasks
   accepts_nested_attributes_for :tasks, reject_if: :all_blank, allow_destroy: true, limit: 1
 
   validates :title, presence: true, length: { minimum: 3 }
-  validates :user, presence: true
+  validates :user_id, presence: true
 
 end
