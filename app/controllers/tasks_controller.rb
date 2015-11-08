@@ -19,7 +19,6 @@ class TasksController < ApplicationController
   end
 
   def show
-    @subtask = @task.subtasks.build
   end
 
   def new

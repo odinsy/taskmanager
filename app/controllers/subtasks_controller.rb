@@ -2,20 +2,21 @@ class SubtasksController < ApplicationController
 
   before_action :find_subtask, only: [:edit, :update, :destroy, :run, :complete]
 
+  respond_to :html, :js
+
   def run
+    @task = @subtask.task
     @subtask.run!
-    redirect_to :back
   end
 
   def complete
+    @task = @subtask.task
     @subtask.complete!
-    redirect_to :back
   end
 
   def create
     @task = current_user.tasks.find(params[:task_id])
     @subtask = @task.subtasks.create(subtask_params)
-    redirect_to @subtask.task
   end
 
   def edit
@@ -25,8 +26,8 @@ class SubtasksController < ApplicationController
   end
 
   def destroy
+    @task = @subtask.task
     @subtask.destroy
-    redirect_to @subtask.task
   end
 
   private
