@@ -4,6 +4,18 @@ class TasksController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_task
   respond_to :html, :js
 
+  def tomorrow
+    @tasks = current_user.tasks.active.tomorrow
+  end
+
+  def scheduled
+    @tasks = current_user.tasks.active.scheduled
+  end
+
+  def waiting
+    @tasks = current_user.tasks.active.waiting
+  end
+
   def run
     @task.run!
     redirect_to :back

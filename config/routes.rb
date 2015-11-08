@@ -21,9 +21,9 @@ Rails.application.routes.draw do
       end
     end
     collection do
-      get :tomorrow,  controller: :task_schedules
-      get :scheduled, controller: :task_schedules
-      get :waiting,   controller: :task_schedules
+      get :tomorrow
+      get :scheduled
+      get :waiting
     end
     member do
       put :run
