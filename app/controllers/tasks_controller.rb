@@ -18,12 +18,20 @@ class TasksController < ApplicationController
 
   def run
     @task.run!
-    redirect_to :back
+    @project = @task.project
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { render 'tasks' }
+    end
   end
 
   def complete
     @task.complete!
-    redirect_to :back
+    @project = @task.project
+    respond_to do |format|
+      format.html { redirect_to :back }
+      format.js { render 'tasks' }
+    end
   end
 
   def index
@@ -56,6 +64,7 @@ class TasksController < ApplicationController
       else
         if project_present
           @project = @task.project
+          format.js
         else
           format.html { render 'new', notice: "Could not save task" }
         end
@@ -74,9 +83,10 @@ class TasksController < ApplicationController
 
   def destroy
     respond_to do |format|
+      @project = @task.project
       @task.destroy
       format.html { redirect_to(:back) }
-      format.js
+      format.js { render 'tasks' }
     end
   end
 

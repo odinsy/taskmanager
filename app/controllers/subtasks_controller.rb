@@ -5,13 +5,19 @@ class SubtasksController < ApplicationController
   respond_to :html, :js
 
   def run
-    @task = @subtask.task
     @subtask.run!
+    @task = @subtask.task
+    respond_to do |format|
+      format.js { render 'subtasks' }
+    end
   end
 
   def complete
-    @task = @subtask.task
     @subtask.complete!
+    @task = @subtask.task
+    respond_to do |format|
+      format.js { render 'subtasks' }
+    end
   end
 
   def create
@@ -28,6 +34,9 @@ class SubtasksController < ApplicationController
   def destroy
     @task = @subtask.task
     @subtask.destroy
+    respond_to do |format|
+      format.js { render 'subtasks' }
+    end
   end
 
   private
