@@ -13,32 +13,7 @@
     span
       = @task.description
 
-- if @task.subtasks.active.any?
-  .panel.panel-default.subtasks
-    .panel-heading.task-title
-      span
-        | Next
-    - @task.subtasks.active.each do |task|
-      .panel-body.subtask-title
-        ul
-          li
-            => link_to 'Complete', complete_task_path(task), method: :put
-            => task.title
-            => link_to 'Edit', edit_task_path(task)
-            = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
-
-- if @task.subtasks.completed.any?          
-  .panel.panel-default.subtasks
-    .panel-heading.task-title
-      span
-        | Completed
-    - @task.subtasks.completed.each do |task|
-      .panel-body.subtask-title
-        ul
-          li
-            => link_to 'Run', run_task_path(task), method: :put
-            => task.title
-            => link_to 'Edit', edit_task_path(task)
-            = link_to 'Delete', [task], method: :delete, data: { confirm: 'Вы уверены?' }
+#subtasks
+  = render "subtasks"
 
 = render "subtask_form"
