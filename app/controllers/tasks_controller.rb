@@ -4,18 +4,6 @@ class TasksController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_task
   respond_to :html, :js
 
-  def tomorrow
-    @tasks = current_user.tasks.active.tomorrow
-  end
-
-  def scheduled
-    @tasks = current_user.tasks.active.scheduled
-  end
-
-  def waiting
-    @tasks = current_user.tasks.active.waiting
-  end
-
   def run
     @task.run!
     @project = @task.project
@@ -32,6 +20,18 @@ class TasksController < ApplicationController
       format.html { redirect_to :back }
       format.js { render 'tasks' }
     end
+  end
+
+  def tomorrow
+    @tasks = current_user.tasks.active.tomorrow
+  end
+
+  def scheduled
+    @tasks = current_user.tasks.active.scheduled
+  end
+
+  def waiting
+    @tasks = current_user.tasks.active.waiting
   end
 
   def index
@@ -54,20 +54,13 @@ class TasksController < ApplicationController
       t.project = project if project_present
     end
     respond_to do |format|
-      if @task.errors.empty?
-        if project_present
-          @project = @task.project
-          format.js
-        else
-          format.html { redirect_to tasks_path, notice: "Task created!" }
-        end
+      if project_present
+        @project = @task.project
+        format.js
+      elsif @task.errors.empty?
+        format.html { redirect_to tasks_path, notice: "Task created!" }
       else
-        if project_present
-          @project = @task.project
-          format.js
-        else
-          format.html { render 'new', notice: "Could not save task" }
-        end
+        format.html { render 'new', notice: "Could not save task" }
       end
     end
   end
@@ -82,9 +75,9 @@ class TasksController < ApplicationController
   end
 
   def destroy
+    @task.destroy
+    @project = @task.project
     respond_to do |format|
-      @project = @task.project
-      @task.destroy
       format.html { redirect_to(:back) }
       format.js { render 'tasks' }
     end
