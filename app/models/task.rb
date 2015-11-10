@@ -1,17 +1,7 @@
 class Task < ActiveRecord::Base
 
   include AASM
-
-  aasm :column => 'state' do
-    state :active, :initial => true
-    state :completed
-    event :run do
-      transitions :from => :completed, :to => :active
-    end
-    event :complete do
-      transitions :from => :active, :to => :completed
-    end
-  end
+  include ChangeState
 
   default_value_for :priority, 0
 
