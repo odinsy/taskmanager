@@ -3,15 +3,16 @@ require "rails_helper"
 feature "Create a task" do
 
   let!(:user) { create(:user) }
+  let!(:project) { create(:project, user_id: user.id) }
 
-  context "when user trying to create a task" do
+  context "when user creating a task" do
 
     before :each do
       login("user@example.com", "password")
       visit new_task_path
     end
 
-    it "creates the new task with valid attributes" do
+    it "creates a new task with valid attributes" do
       fill_in "Title", with: "Task 1"
       select Date.current.year, from: "task[scheduled(1i)]"
       select Date.today.strftime("%B"), from: "task[scheduled(2i)]"
@@ -21,7 +22,7 @@ feature "Create a task" do
       expect(page).to have_content "Task 1"
     end
 
-    it "doesn't create the new task with invalid attributes" do
+    it "doesn't create a new task with invalid attributes" do
       fill_in "Title", with: ""
       select Date.current.year, from: "task[scheduled(1i)]"
       select Date.today.strftime("%B"), from: "task[scheduled(2i)]"
@@ -33,6 +34,27 @@ feature "Create a task" do
 
   end
 
+  context "when user creating a task on the Project page" do
+
+    before :each do
+      login("user@example.com", "password")
+      visit project_path(project)
+    end
+
+    it "creates a new task with valid attributes", js: true do
+      fill_in "Title", with: "Task 1"
+      click_on "Add Task"
+      expect(page).to have_content "Task 1"
+    end
+
+    it "doesn't create a new task with invalid attributes", js: true do
+      fill_in "Title", with: "az"
+      click_on "Add Task"
+      expect(page).to_not have_content "az"
+    end
+
+  end
+
 end
 
 feature "View and edit a task" do
@@ -40,18 +62,18 @@ feature "View and edit a task" do
   let!(:user) { create(:user) }
   let!(:task) { create(:task, user_id: user.id) }
 
-  context "when user trying to view or edit the task" do
+  context "when user trying to view or edit a task" do
 
     before :each do
       login("user@example.com", "password")
     end
 
-    it "shows the task's page" do
+    it "shows a task's page" do
       visit task_path(task)
       expect(page).to have_content task.title
     end
 
-    it "shows the page for edit the task" do
+    it "shows a page for edit the task" do
       visit edit_task_path(task)
       expect(page).to have_button "Update Task"
     end
