@@ -1,8 +1,17 @@
-- @projects.each do |project|
-  li.list-group-item
-    span
-      => link_to project.title, project_path(project)
-      => link_to "Edit", edit_project_path(project)
-      => link_to "Delete", project, method: :delete, data: { confirm: 'Вы уверены?' }
-    span.badge
-      = project.tasks.active.count 
+.list-group
+  - @projects.each do |project|
+    li.list-group-item
+      - if project.active?
+        => link_to complete_project_path(project), method: :put do 
+          .glyphicon.glyphicon-unchecked
+      - else
+        => link_to run_project_path(project), method: :put do
+          .glyphicon.glyphicon-check
+      span
+        => link_to project.title, project_path(project)
+      .pull-right
+        => link_to "Edit", edit_project_path(project), class: "btn btn-xs btn-info"
+        => link_to project_path(project), method: :delete, data: { confirm: 'Вы уверены?' }, class: "btn btn-xs btn-warning" do
+          .glyphicon.glyphicon-trash
+        span.badge
+          = project.tasks.active.count 

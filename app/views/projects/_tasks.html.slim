@@ -3,25 +3,33 @@
     .panel-heading.task-title
       span
         | Next
-    - @project.tasks.active.each do |task|
-      .panel-body.subtask-title
-        ul
-          li
-            => link_to 'Complete', complete_task_path(task), remote: true, method: :put
+    ul.list-group
+      - @project.tasks.active.each do |task|
+        li.list-group-item
+          span
+            => link_to complete_task_path(task), remote: true, method: :put do 
+              .glyphicon.glyphicon-unchecked
+          span
             => task.title
-            => link_to 'Edit', edit_task_path(task)
-            = link_to 'Delete', [task], method: :delete, remote: true, data: { confirm: 'Вы уверены?' }
+          span.pull-right
+            => link_to 'Edit', edit_task_path(task), class: "btn btn-xs btn-info"
+            = link_to task_path(task), method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: "btn btn-xs btn-warning" do
+              .glyphicon.glyphicon-trash
 
 - if @project.tasks.completed.any?          
   .panel.panel-default
     .panel-heading.task-title
       span
         | Completed
-    - @project.tasks.completed.each do |task|
-      .panel-body.subtask-title
-        ul
-          li
-            => link_to 'Run', run_task_path(task), remote: true, method: :put
+    ul.list-group
+      - @project.tasks.completed.each do |task|
+        li.list-group-item
+          span
+            => link_to run_task_path(task), remote: true, method: :put do
+              .glyphicon.glyphicon-check
+          span
             => task.title
-            => link_to 'Edit', edit_task_path(task)
-            = link_to 'Delete', [task], method: :delete, remote: true, data: { confirm: 'Вы уверены?' }
+          span.pull-right
+            => link_to 'Edit', edit_task_path(task), class: "btn btn-xs btn-info"
+            = link_to task_path(task), method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: "btn btn-xs btn-warning" do
+              .glyphicon.glyphicon-trash
