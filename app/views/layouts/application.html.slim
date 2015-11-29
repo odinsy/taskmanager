@@ -27,9 +27,8 @@ html[lang="ru"]
                                     
           .col-md-10.nav-block
             .btn-group.head-align
-              button.btn.btn-default
-                span
-                  .glyphicon.glyphicon-plus
+              = link_to new_task_path, class: "button btn btn-default" do
+                .glyphicon.glyphicon-plus
               button.btn.btn-default.dropdown-toggle data-toggle="dropdown" 
                 span.caret
                 span.sr-only
