@@ -58,7 +58,7 @@ feature "View and edit the project" do
     end
 
   end
-  
+
 end
 
 feature "view the projects" do
@@ -75,11 +75,12 @@ feature "view the projects" do
     end
 
     it "doesn't show the project on the projects page" do
+      visit projects_path
       expect(page).to_not have_content project.title
     end
 
     it "shows the project on the completed projects page" do
-      visit completed_projects_path
+      visit completed_path
       expect(page).to have_content project.title
     end
 

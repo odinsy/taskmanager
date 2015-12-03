@@ -1,0 +1,33 @@
+- if @task.subtasks.active.any?
+  .panel.panel-default
+    .panel-heading
+      span
+        | Next
+    ul.list-group
+      - @task.subtasks.active.each do |subtask|
+        li.list-group-item
+          span
+            => link_to complete_subtask_path(subtask), method: :put, remote: true do 
+              .glyphicon.glyphicon-unchecked
+          span
+            => subtask.title
+          span.pull-right
+            = link_to subtask_path(subtask), method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: "btn btn-xs btn-warning" do
+              .glyphicon.glyphicon-trash
+
+- if @task.subtasks.completed.any?          
+  .panel.panel-default
+    .panel-heading.task-title
+      span
+        | Completed
+    ul.list-group
+      - @task.subtasks.completed.each do |subtask|
+        li.list-group-item
+          span
+            => link_to run_subtask_path(subtask), method: :put, remote: true do
+              .glyphicon.glyphicon-check
+          span
+            => subtask.title
+          span.pull-right
+            = link_to subtask_path(subtask), method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: "btn btn-xs btn-warning" do
+              .glyphicon.glyphicon-trash

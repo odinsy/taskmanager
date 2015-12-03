@@ -17,17 +17,20 @@ gem 'simple_form'
 gem 'aasm'
 gem "default_value_for", "~> 3.0.0"
 gem 'sorcery'
+gem 'responders'
 
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'fuubar'
+  gem 'bullet'
 end
 
 group :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'
   gem 'capybara'
+  gem 'selenium-webdriver'
   gem 'database_cleaner'
 end

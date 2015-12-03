@@ -1,0 +1,5 @@
+= simple_form_for @task.subtasks.build, url: task_subtasks_path(@task), remote: true do |f|
+  .form-inputs
+    = f.input :title
+  .form-actions
+    = f.button :submit, "Add Subtask", class: "btn-primary"

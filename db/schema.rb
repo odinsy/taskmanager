@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151004204100) do
+ActiveRecord::Schema.define(version: 20151105200310) do
 
   create_table "projects", force: :cascade do |t|
     t.string   "title"
@@ -24,21 +24,35 @@ ActiveRecord::Schema.define(version: 20151004204100) do
     t.date     "scheduled"
   end
 
+  add_index "projects", ["user_id"], name: "index_projects_on_user_id"
+
+  create_table "subtasks", force: :cascade do |t|
+    t.string   "title",      null: false
+    t.integer  "user_id"
+    t.integer  "task_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string   "state"
+  end
+
+  add_index "subtasks", ["task_id"], name: "index_subtasks_on_task_id"
+  add_index "subtasks", ["user_id"], name: "index_subtasks_on_user_id"
+
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
     t.integer  "priority"
-    t.string   "status"
+    t.string   "state"
     t.date     "scheduled"
     t.date     "deadline"
     t.integer  "user_id"
     t.integer  "project_id"
-    t.integer  "parent_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
 
-  add_index "tasks", ["parent_id"], name: "index_tasks_on_parent_id"
+  add_index "tasks", ["project_id"], name: "index_tasks_on_project_id"
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",            null: false

@@ -1,7 +1,5 @@
-= simple_form_for [@project, @project.tasks.build] do |f|
-  = f.error_notification
+= simple_form_for [@project, @project.tasks.build], remote: true do |f|
   .form-inputs
-    = f.hidden_field :project_id, value: @project.id
     = f.input :title
   .form-actions
-    = f.button :submit, "Добавить задачу"
+    = f.button :submit, "Add Task", class: "btn-primary"

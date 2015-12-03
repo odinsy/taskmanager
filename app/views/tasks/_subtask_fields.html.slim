@@ -1,7 +1,0 @@
-= simple_form_for @task do |t|
-  = t.simple_fields_for :subtasks, @task.subtasks.build do |f|
-    .form-inputs
-      = f.input :title
-      = f.hidden_field :user_id, value: @task.user_id
-    .form-actions
-      = f.button  :submit, "Добавить подзадачу"

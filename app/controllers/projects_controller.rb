@@ -4,20 +4,16 @@ class ProjectsController < ApplicationController
 
   def run
     @project.run!
-    redirect_to projects_path
+    redirect_to :back
   end
 
   def complete
     @project.complete!
-    redirect_to projects_path
+    redirect_to :back
   end
 
   def index
     @projects = current_user.projects.active
-  end
-
-  def completed
-    @projects = current_user.projects.completed
   end
 
   def new
@@ -33,7 +29,7 @@ class ProjectsController < ApplicationController
   def create
     @project = current_user.projects.create(project_params)
     if @project.errors.empty?
-      redirect_to tasks_path
+      redirect_to @project
     else
       render 'new'
     end
@@ -60,7 +56,7 @@ class ProjectsController < ApplicationController
     end
 
     def project_params
-      params.require(:project).permit(:title, :description, :scheduled, :deadline, tasks_attributes: [:title, :user_id])
+      params.require(:project).permit(:title, :description, :scheduled, :deadline)
     end
 
 end

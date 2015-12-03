@@ -1,5 +1,5 @@
 require 'rails_helper'
 
-describe TasksController do
+describe Subtask do
 
 end

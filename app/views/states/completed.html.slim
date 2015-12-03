@@ -1,0 +1,13 @@
+- if @projects.completed.any?
+  .panel.panel-default
+    .panel-heading
+      span
+        | Completed Projects
+    = render "projects/projects"
+    
+- if @tasks.completed.any?
+  .panel.panel-default
+    .panel-heading
+      span
+        | Completed Tasks
+    = render "tasks/tasks"
