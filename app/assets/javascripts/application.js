@@ -14,3 +14,14 @@
 //= require bootstrap-sprockets
 //= require jquery_ujs
 //= require turbolinks
+
+$(document).ready(function() {
+  $('.hide-projects').click(function() {
+    $('#projects').toggle();
+    $(this).toggleClass('glyphicon-menu-right glyphicon-menu-down');
+  });
+  $('.hide-completed').click(function() {
+    $('.completed').toggle();
+    $(this).toggleClass('glyphicon-menu-right glyphicon-menu-down');
+  });
+});

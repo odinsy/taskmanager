@@ -45,37 +45,36 @@ html[lang="ru"]
     main.container
       .row
         aside.col-md-2.nopadding.sidebar
-          section.sidebar-title
-            span
-              .glyphicon.glyphicon-menu-right
-              | Tasks
-          ul.nav.nav-pills.nav-stacked
-            li
-              = link_to "Today", tasks_path
-            li
-              = link_to "Tomorrow", tomorrow_tasks_path
-            li
-              = link_to "Scheduled", scheduled_tasks_path
-            li
-              = link_to "Waiting", waiting_tasks_path
-          section.sidebar-title
+          .task
+            .sidebar-title
+              span
+                | Tasks
             ul.nav.nav-pills.nav-stacked
               li
-                span
-                  .glyphicon.glyphicon-menu-right
-                  = link_to "Projects", projects_path
-                  
-          ul.nav.nav-pills.nav-stacked
-            li
-              - current_user.projects.active.each do |project|
-                = link_to project.title, project_path(project)
-          section.sidebar-title
-            span
-              .glyphicon.glyphicon-menu-right
-              | Done
-          ul.nav.nav-pills.nav-stacked
-            li
-              = link_to "Completed", completed_path
+                = link_to "Today", tasks_path
+              li
+                = link_to "Tomorrow", tomorrow_tasks_path
+              li
+                = link_to "Scheduled", scheduled_tasks_path
+              li
+                = link_to "Waiting", waiting_tasks_path
+          .project
+            .sidebar-title
+              .glyphicon.glyphicon-menu-right.hide-projects
+              = link_to "Projects ",projects_path, class: "projects"
+                      
+            ul.nav.nav-pills.nav-stacked#projects
+              li
+                - current_user.projects.active.each do |project|
+                  = link_to project.title, project_path(project)
+          .done
+            .sidebar-title
+              .glyphicon.glyphicon-menu-right.hide-completed
+              span
+                | Done
+            ul.nav.nav-pills.nav-stacked.completed
+              li
+                = link_to "Completed", completed_path
         .col-md-10.content
           section
             - flash.each do |name, msg|
