@@ -7,6 +7,12 @@
       span
         = @task.deadline
   .panel-heading.task-title
+    - if @task.active?
+      => link_to complete_task_path(@task), method: :put do
+        .glyphicon.glyphicon-unchecked
+    - else
+      => link_to run_task_path(@task), method: :put do
+        .glyphicon.glyphicon-check
     span
       = @task.title
   .panel-body.task-description

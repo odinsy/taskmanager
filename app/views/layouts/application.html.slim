@@ -45,34 +45,48 @@ html[lang="ru"]
     main.container
       .row
         aside.col-md-2.nopadding.sidebar
-          .task
+          #task
             .sidebar-title
               span
                 | Tasks
             ul.nav.nav-pills.nav-stacked
               li
-                = link_to "Today", tasks_path
+                = link_to tasks_path do
+                  .glyphicon.glyphicon-star
+                  span
+                    | Today
               li
-                = link_to "Tomorrow", tomorrow_tasks_path
+                = link_to tomorrow_tasks_path do
+                  .glyphicon.glyphicon-tasks
+                  span
+                    | Tomorrow
               li
-                = link_to "Scheduled", scheduled_tasks_path
+                = link_to scheduled_tasks_path do
+                  .glyphicon.glyphicon-calendar
+                  span
+                    | Scheduled
               li
-                = link_to "Waiting", waiting_tasks_path
-          .project
+                = link_to waiting_tasks_path do
+                  .glyphicon.glyphicon-time
+                  span
+                    | Waiting
+          #project
             .sidebar-title
               .glyphicon.glyphicon-menu-right.hide-projects
-              = link_to "Projects ",projects_path, class: "projects"
-                      
+              = link_to "Projects ", projects_path, class: "projects"
+                
             ul.nav.nav-pills.nav-stacked#projects
               li
                 - current_user.projects.active.each do |project|
-                  = link_to project.title, project_path(project)
-          .done
+                  = link_to project_path(project) do
+                    .glyphicon.glyphicon-list-alt
+                    span
+                      = project.title
+          #done
             .sidebar-title
-              .glyphicon.glyphicon-menu-right.hide-completed
               span
                 | Done
-            ul.nav.nav-pills.nav-stacked.completed
+            ul.nav.nav-pills.nav-stacked
               li
                 = link_to "Completed", completed_path
         .col-md-10.content

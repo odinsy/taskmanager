@@ -24,7 +24,6 @@ body {
 textarea {
   resize: none;
 }
-/* Блок tasks#index */
 .user-block {
   padding: 15px;
 }
@@ -47,9 +46,13 @@ textarea {
 .content hr {
   margin: 0;
 }
+
+.sidebar .nav > li > a {
+  padding: 10px 25px !important;
+}
 .sidebar-title {
   background: #b4aaaa;
-  padding: 10px 15px;
+  padding: 10px 20px;
 }
 .sidebar-title:hover {
   background-color: #D0D0D0 none repeat scroll 0 0;
@@ -60,9 +63,13 @@ textarea {
 .projects:link {
   text-decoration: none;
 }
-.hide-projects, .hide-completed {
+.hide-projects,
+.hide-completed {
   cursor: pointer;
   cursor: hand;
+}
+#project .sidebar-title {
+  padding: 10px 0px 10px 2px;
 }
 
 /* Блок tasks#show */

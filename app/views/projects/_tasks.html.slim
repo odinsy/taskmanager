@@ -6,12 +6,11 @@
     ul.list-group
       - @project.tasks.active.each do |task|
         li.list-group-item
-          span
-            => link_to complete_task_path(task), remote: true, method: :put do 
-              .glyphicon.glyphicon-unchecked
+          => link_to complete_task_path(task), remote: true, method: :put do 
+            .glyphicon.glyphicon-unchecked
           span
             => task.title
-          span.pull-right
+          .pull-right
             => link_to 'Edit', edit_task_path(task), class: "btn btn-xs btn-info"
             = link_to task_path(task), method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: "btn btn-xs btn-warning" do
               .glyphicon.glyphicon-trash
@@ -24,12 +23,11 @@
     ul.list-group
       - @project.tasks.completed.each do |task|
         li.list-group-item
-          span
-            => link_to run_task_path(task), remote: true, method: :put do
-              .glyphicon.glyphicon-check
+          => link_to run_task_path(task), remote: true, method: :put do
+            .glyphicon.glyphicon-check
           span
             => task.title
-          span.pull-right
+          .pull-right
             => link_to 'Edit', edit_task_path(task), class: "btn btn-xs btn-info"
             = link_to task_path(task), method: :delete, remote: true, data: { confirm: 'Вы уверены?' }, class: "btn btn-xs btn-warning" do
               .glyphicon.glyphicon-trash
