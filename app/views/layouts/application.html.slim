@@ -88,7 +88,10 @@ html[lang="ru"]
                 | Done
             ul.nav.nav-pills.nav-stacked
               li
-                = link_to "Completed", completed_path
+                = link_to completed_path do
+                  .glyphicon.glyphicon-ok
+                  span
+                    | Completed
         .col-md-10.content
           section
             - flash.each do |name, msg|

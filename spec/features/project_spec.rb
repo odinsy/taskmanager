@@ -71,7 +71,7 @@ feature "view the projects" do
     before :each do
       login("user@example.com", "password")
       visit project_path(project)
-      click_on "Complete"
+      page.find(".task-title a").click
     end
 
     it "doesn't show the project on the projects page" do
