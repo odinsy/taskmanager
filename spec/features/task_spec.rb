@@ -99,13 +99,13 @@ feature "Views tasks" do
     end
 
     it "doesn't show tomorrows tasks" do
-      task.update_attributes(scheduled: Date.tomorrow)
+      task.update_attributes(scheduled: Date.today + 1)
       visit tasks_path
       expect(page).to_not have_content(task.title)
     end
 
     it "doesn't show scheduled task" do
-      task.update_attributes(scheduled: Date.tomorrow + 1)
+      task.update_attributes(scheduled: Date.today + 2)
       visit tasks_path
       expect(page).to_not have_content(task.title)
     end
@@ -131,7 +131,7 @@ feature "Views tasks" do
     end
 
     it "shows their" do
-      task.update_attributes(scheduled: Date.tomorrow)
+      task.update_attributes(scheduled: Date.today + 1)
       visit tomorrow_tasks_path
       expect(page).to have_content task.title
     end
@@ -143,7 +143,7 @@ feature "Views tasks" do
     end
 
     it "doesn't show scheduled task" do
-      task.update_attributes(scheduled: Date.tomorrow + 1)
+      task.update_attributes(scheduled: Date.today + 2)
       visit tomorrow_tasks_path
       expect(page).to_not have_content(task.title)
     end
@@ -169,7 +169,7 @@ feature "Views tasks" do
     end
 
     it "shows their" do
-      task.update_attributes(scheduled: Date.tomorrow + 1)
+      task.update_attributes(scheduled: Date.today + 2)
       visit scheduled_tasks_path
       expect(page).to have_content task.title
     end
@@ -181,7 +181,7 @@ feature "Views tasks" do
     end
 
     it "doesn't show tomorrows tasks" do
-      task.update_attributes(scheduled: Date.tomorrow)
+      task.update_attributes(scheduled: Date.today + 1)
       visit tasks_path
       expect(page).to_not have_content(task.title)
     end
@@ -219,13 +219,13 @@ feature "Views tasks" do
     end
 
     it "doesn't show tomorrows tasks" do
-      task.update_attributes(scheduled: Date.tomorrow)
+      task.update_attributes(scheduled: Date.today + 1)
       visit tasks_path
       expect(page).to_not have_content(task.title)
     end
 
     it "doesn't show scheduled task" do
-      task.update_attributes(scheduled: Date.tomorrow + 1)
+      task.update_attributes(scheduled: Date.today + 2)
       visit tomorrow_tasks_path
       expect(page).to_not have_content(task.title)
     end

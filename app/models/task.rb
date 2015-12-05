@@ -15,8 +15,8 @@ class Task < ActiveRecord::Base
   validates :user_id, presence: true
 
   scope :today, -> { where("scheduled <= ?", Date.today) }
-  scope :tomorrow, -> { where("scheduled == ?", Date.tomorrow) }
-  scope :scheduled, -> { where("scheduled > ?", Date.tomorrow) }
+  scope :tomorrow, -> { where("scheduled == ?", Date.today + 1) }
+  scope :scheduled, -> { where("scheduled > ?", Date.today + 1) }
   scope :waiting, -> { where("scheduled IS ?", nil) }
   scope :completed, -> { where(state: "completed") }
 
