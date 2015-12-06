@@ -3,7 +3,7 @@ class Task < ActiveRecord::Base
   include AASM
   include ChangeState
 
-  #default_value_for :priority, 0
+  default_value_for :priority, 0
   enum priorities: { Zero: 0, Low: 1, Medium: 2, High: 3 }
 
   belongs_to  :user
