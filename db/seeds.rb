@@ -6,6 +6,4 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# @priorities = Priority.create([{priority: 0}, {priority: 1}, {priority: 2}, {priority: 3}])
-
-4.times { |x| Priority.create(priority: x) }
+#4.times { |x| Priority.create(priority: x) }
