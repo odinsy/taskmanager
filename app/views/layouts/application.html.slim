@@ -15,7 +15,8 @@ html[lang="ru"]
               li.dropdown
                 #presentation.dropdown-toggle data-toggle="dropdown" 
                   .glyphicon.glyphicon-user
-                  = link_to current_user.name  
+                  span
+                    = link_to current_user.name  
                   .caret
                 ul.dropdown-menu
                   li
