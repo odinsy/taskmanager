@@ -25,6 +25,13 @@ group :development, :test do
   gem 'spring'
   gem 'fuubar'
   gem 'bullet'
+  gem 'capistrano', '~> 3.0'
+  # Гем, который добавляет специфические для Rails таски, такие как прогон миграций и компиляция ассетов
+  gem 'capistrano-rails'
+  # Гем, добавляющий возможности bundle к capistrano
+  gem 'capistrano-bundler', '>= 1.1.0'
+  # Добавление поддержки Rbenv (менеджера версий для Ruby)
+  gem 'capistrano-rvm'
 end
 
 group :test do
