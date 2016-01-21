@@ -30,7 +30,7 @@ group :development, :test do
   gem 'capistrano-rails'
   # Гем, добавляющий возможности bundle к capistrano
   gem 'capistrano-bundler', '>= 1.1.0'
-  # Добавление поддержки Rbenv (менеджера версий для Ruby)
+  # Добавление поддержки RVM (менеджера версий для Ruby)
   gem 'capistrano-rvm'
 end
 
