@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.2.1'
+gem 'rails', '4.2.6'
 gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -19,6 +19,7 @@ gem "default_value_for", "~> 3.0.0"
 gem 'sorcery'
 gem 'responders'
 gem 'unicorn'
+gem 'capistrano3-unicorn'
 
 group :development, :test do
   gem 'byebug'
@@ -26,12 +27,9 @@ group :development, :test do
   gem 'spring'
   gem 'fuubar'
   gem 'bullet'
-  gem 'capistrano', '~> 3.0'
-  # Гем, который добавляет специфические для Rails таски, такие как прогон миграций и компиляция ассетов
+  gem 'capistrano'
   gem 'capistrano-rails'
-  # Гем, добавляющий возможности bundle к capistrano
   gem 'capistrano-bundler', '>= 1.1.0'
-  # Добавление поддержки RVM (менеджера версий для Ruby)
   gem 'capistrano-rvm'
 end
 
